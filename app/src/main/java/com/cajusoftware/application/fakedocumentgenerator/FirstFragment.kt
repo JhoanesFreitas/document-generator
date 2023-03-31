@@ -1,12 +1,13 @@
-package com.cajusoftware.fakedocumentgenerator
+package com.cajusoftware.application.fakedocumentgenerator
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.cajusoftware.fakedocumentgenerator.databinding.FragmentFirstBinding
+import androidx.fragment.app.Fragment
+import com.cajusoftware.application.fakedocumentgenerator.databinding.FragmentFirstBinding
+import com.cajusoftware.fakedocumentgenerator.generators.CpfGenerator
+import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -19,10 +20,17 @@ class FirstFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val cpfGenerator: CpfGenerator by lazy {
+        CpfGenerator.Builder()
+            .withSymbols(true)
+            .setFederationUnit(FederationUnit.RN)
+            .build()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,7 +41,8 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            binding.textviewFirst.text = cpfGenerator.getNewCpf()
+//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 

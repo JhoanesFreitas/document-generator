@@ -1,15 +1,17 @@
-package com.cajusoftware.fakedocumentgenerator
+package com.cajusoftware.application.fakedocumentgenerator
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import com.cajusoftware.fakedocumentgenerator.databinding.ActivityMainBinding
+import com.cajusoftware.application.fakedocumentgenerator.databinding.ActivityMainBinding
+import com.cajusoftware.fakedocumentgenerator.generators.CpfGenerator
+import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,12 +26,17 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        val cpfGenerator = CpfGenerator.Builder()
+            .withSymbols(true)
+            .setFederationUnit(FederationUnit.RN)
+            .build()
+
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, cpfGenerator.getNewCpf(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
     }
