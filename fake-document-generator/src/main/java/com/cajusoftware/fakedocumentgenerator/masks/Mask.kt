@@ -2,16 +2,14 @@ package com.cajusoftware.fakedocumentgenerator.masks
 
 import com.cajusoftware.fakedocumentgenerator.utils.withoutDocumentSymbols
 
-private const val MASK = "###.###.###-##"
-
-class CpfMask {
+class Mask(private val maskEnum: MaskEnum) {
 
     fun addMask(cpfString: String): String {
         val str = cpfString.withoutDocumentSymbols
         var cpfWithMask = ""
 
         var i = 0
-        for (m: Char in MASK.toCharArray()) {
+        for (m: Char in maskEnum.value.toCharArray()) {
             if (m != '#') {
                 cpfWithMask += m
                 continue

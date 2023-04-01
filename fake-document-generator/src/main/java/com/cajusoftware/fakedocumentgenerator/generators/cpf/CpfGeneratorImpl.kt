@@ -1,13 +1,13 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
-import com.cajusoftware.fakedocumentgenerator.masks.CpfMask
+import com.cajusoftware.fakedocumentgenerator.masks.Mask
 import com.cajusoftware.fakedocumentgenerator.utils.space
 import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
 internal class CpfGeneratorImpl internal constructor() : CpfGenerator {
 
-    internal var cpfMask: CpfMask? = null
+    internal var mask: Mask? = null
     internal var prefix: String? = null
     internal var suffix: String? = null
     internal var federationUnit: FederationUnit? = null
@@ -41,7 +41,7 @@ internal class CpfGeneratorImpl internal constructor() : CpfGenerator {
 
         var cpf = (numbers.joinToString("") + firstChecker + getNumberChecker(sumSecondSequence))
 
-        cpf = cpfMask?.addMask(cpf) ?: cpf
+        cpf = mask?.addMask(cpf) ?: cpf
 
         return (prefix?.trim()?.space() ?: "")
             .plus(cpf)

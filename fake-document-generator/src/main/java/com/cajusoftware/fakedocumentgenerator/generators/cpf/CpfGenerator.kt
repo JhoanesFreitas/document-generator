@@ -1,7 +1,8 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
-import com.cajusoftware.fakedocumentgenerator.masks.CpfMask
+import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
+import com.cajusoftware.fakedocumentgenerator.masks.Mask
 
 interface CpfGenerator {
     fun generateCpf(): String
@@ -12,7 +13,7 @@ interface CpfGenerator {
 
         fun withSymbols(value: Boolean) = apply {
             if (value)
-                cpfGenerator.cpfMask = CpfMask()
+                cpfGenerator.mask = Mask(MaskEnum.CPF)
         }
 
         fun setPrefix(prefix: String) = apply {
