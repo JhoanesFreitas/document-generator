@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.cajusoftware.application.fakedocumentgenerator.databinding.FragmentFirstBinding
-import com.cajusoftware.fakedocumentgenerator.generators.CpfGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.cajusoftware.fakedocumentgenerator.generators.cpf.CpfGenerator
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
@@ -41,7 +39,12 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            binding.textviewFirst.text = cpfGenerator.getNewCpf()
+
+            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+                cpfGenerator.generateCpfSet(5)
+            }
+
+            binding.textviewFirst.text = cpfGenerator.generateCpf()
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

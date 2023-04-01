@@ -9,8 +9,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.cajusoftware.application.fakedocumentgenerator.databinding.ActivityMainBinding
-import com.cajusoftware.fakedocumentgenerator.generators.CpfGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.cajusoftware.fakedocumentgenerator.generators.cpf.CpfGenerator
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, cpfGenerator.getNewCpf(), Snackbar.LENGTH_LONG)
+            Snackbar.make(view, cpfGenerator.generateCpf(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
     }

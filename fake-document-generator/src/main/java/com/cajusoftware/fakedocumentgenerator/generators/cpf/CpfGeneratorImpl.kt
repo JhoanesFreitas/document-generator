@@ -1,17 +1,18 @@
-package com.cajusoftware.fakedocumentgenerator.generators
+package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
+import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
 import com.cajusoftware.fakedocumentgenerator.masks.CpfMask
 import com.cajusoftware.fakedocumentgenerator.utils.space
 import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
-class CpfGenerator private constructor() {
+internal class CpfGeneratorImpl internal constructor() : CpfGenerator {
 
-    private var cpfMask: CpfMask? = null
-    private var prefix: String? = null
-    private var suffix: String? = null
-    private var federationUnit: FederationUnit? = null
+    internal var cpfMask: CpfMask? = null
+    internal var prefix: String? = null
+    internal var suffix: String? = null
+    internal var federationUnit: FederationUnit? = null
 
-    fun getNewCpf(): String {
+    override fun generateCpf(): String {
         val numbers = arrayListOf<Int>()
         var sumFirstSequence = 0
         var sumSecondSequence = 0
@@ -47,29 +48,16 @@ class CpfGenerator private constructor() {
             .plus((suffix?.trim()?.spaceBeforeThat() ?: ""))
     }
 
+    override suspend fun generateCpfSet(quantity: Int): Set<String> {
+        val cpfSet = mutableSetOf<String>()
+
+        repeat(quantity) {
+            cpfSet.add(generateCpf())
+        }
+
+        return cpfSet
+    }
+
     private fun getNumberChecker(sumSequence: Int): Int =
         if (sumSequence % 11 < 2) 0 else 11 - (sumSequence % 11)
-
-    class Builder {
-        private val cpfGenerator = CpfGenerator()
-
-        fun withSymbols(value: Boolean) = apply {
-            if (value)
-                cpfGenerator.cpfMask = CpfMask()
-        }
-
-        fun setPrefix(prefix: String) = apply {
-            cpfGenerator.prefix = prefix
-        }
-
-        fun setSuffix(suffix: String) = apply {
-            cpfGenerator.suffix = suffix
-        }
-
-        fun setFederationUnit(federationUnit: FederationUnit) = apply {
-            cpfGenerator.federationUnit = federationUnit
-        }
-
-        fun build() = cpfGenerator
-    }
 }
