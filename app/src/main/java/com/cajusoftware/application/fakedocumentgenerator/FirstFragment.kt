@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.cajusoftware.application.fakedocumentgenerator.databinding.FragmentFirstBinding
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.cajusoftware.fakedocumentgenerator.generators.cnpj.CnpjGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.cpf.CpfGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.rg.RgGenerator
 
@@ -29,6 +30,12 @@ class FirstFragment : Fragment() {
         RgGenerator.Builder().withSymbols(true).build()
     }
 
+    private val cnpjGenerator: CnpjGenerator by lazy {
+        CnpjGenerator.Builder()
+            .withSymbols(true)
+            .build()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +51,7 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
 
 //            binding.textviewFirst.text = cpfGenerator.generateCpf()
-            binding.textviewFirst.text = rgGenerator.generateRg()
+            binding.textviewFirst.text = cnpjGenerator.generateCnpj()
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
