@@ -2,7 +2,7 @@
 buildscript {
     ext {
         //versions
-        fake_document_generator_version = '1.0.10'
+        fake_document_generator_version = '1.0.11'
         groupId = "com.caju.software"
 
         //core
