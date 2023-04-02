@@ -1,3 +1,3 @@
 install:
   FILE="-Dfile=fake-document-generator.aar"
-  mvn install:install-file $FILE -DgroupId=com.caju.software -DartifactId=fake-document-generator -Dversion=1.0.9 -Dpackaging=aar -DpomFile=pom.xml
+  mvn install:install-file $FILE -DgroupId=com.caju.software -DartifactId=fake-document-generator -Dversion=1.0.10 -Dpackaging=aar -DpomFile=pom.xml dependency:copy-dependencies

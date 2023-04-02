@@ -4,6 +4,8 @@ plugins {
     id 'maven-publish'
 }
 
+apply from: file('../publish.gradle')
+
 android {
     namespace rootProject.ext.package_name
     compileSdk 33
@@ -40,9 +42,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
 }
 
-apply from: '../publishing.gradle'
+//apply from: '../publishing.gradle'
 
-afterEvaluate {
-    publishing.publications.debug.version = "$fake_document_generator_version-SNAPSHOT"
-    publishing.publications.release.version = "$fake_document_generator_version"
-}
+//afterEvaluate {
+//    publishing.publications.debug.version = "$fake_document_generator_version-SNAPSHOT"
+//    publishing.publications.release.version = "$fake_document_generator_version"
+//}
