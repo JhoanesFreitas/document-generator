@@ -5,8 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.caju.software</groupId>
     <artifactId>fake-document-generator</artifactId>
-    <version>1.0.9</version>
-    <packaging>aar</packaging>
+    <version>1.0.10</version>
     <repositories>
         <repository>
             <id>jitpack.io</id>
