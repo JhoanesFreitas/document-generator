@@ -1,8 +1,9 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cnpj
 
-import android.util.Log
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
 import com.cajusoftware.fakedocumentgenerator.masks.Mask
+import com.cajusoftware.fakedocumentgenerator.utils.space
+import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
 internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator {
 
@@ -46,9 +47,9 @@ internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator {
 
         cnpj = mask?.addMask(cnpj) ?: cnpj
 
-        Log.d("CNPJ", cnpj)
-
-        return cnpj
+        return (prefix?.trim()?.space() ?: "")
+            .plus(cnpj)
+            .plus((suffix?.trim()?.spaceBeforeThat() ?: ""))
     }
 
     override suspend fun generateCnpjSet(quantity: Int): Set<String> {
