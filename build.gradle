@@ -2,8 +2,9 @@
 buildscript {
     ext {
         //versions
-        fake_document_generator_version = '1.0.2'
-        groupId = "com.caju.software"
+        fake_document_generator_version = '1.0.15'
+        groupId = 'com.github.JhoanesFreitas'
+        artifactId = 'fake-document-generator'
 
         //core
         core_ktx_version = '1.9.0'
