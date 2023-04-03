@@ -1,10 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'maven-publish'
 }
-
-//apply from: file('../publish.gradle')
 
 android {
     namespace rootProject.ext.package_name
@@ -31,12 +28,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
 }
 
 dependencies {
@@ -48,24 +39,4 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
 }
 
-//apply from: '../publishing.gradle'
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = 'com.github.JhoanesFreitas'
-                artifactId = 'fake-document-generator'
-                version = '1.0.13'
-
-                afterEvaluate {
-                    from components.release
-                }
-            }
-        }
-    }
-}
-//afterEvaluate {
-//    publishing.publications.debug.version = "$fake_document_generator_version-SNAPSHOT"
-//    publishing.publications.release.version = "$fake_document_generator_version"
-//}
+apply from: '../publishing.gradle'

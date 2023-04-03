@@ -1,85 +1,13 @@
 apply plugin: 'maven-publish'
 
-def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
-
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "release"
-            url = uri("https://maven.pkg.github.com/JhoanesFreitas/fake-document-generator")
-
-            credentials {
-                username = githubProperties['gpr.user'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-
-        maven {
-            name = "snapshot"
-            url = uri("https://maven.pkg.github.com/JhoanesFreitas/fake-document-generator")
-
-            credentials {
-                username = githubProperties['gpr.user'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}
-
 afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                group rootProject.ext.groupId
-                artifact bundleDebugAar
-                artifact androidSourcesJar
-                pom.withXml { pomXml -> addDependenciesToPom(pomXml, name) }
-            }
+    android.libraryVariants.each { variant ->
+        publishing.publications.create(variant.name, MavenPublication) {
+            from components.findByName(variant.name)
 
-            debug(MavenPublication) {
-                group rootProject.ext.groupId
-                artifact bundleDebugAar
-                artifact androidSourcesJar
-                pom.withXml { pomXml -> addDependenciesToPom(pomXml, name) }
-            }
-        }
-    }
-}
-
-def addDependenciesToPom(XmlProvider pomXml, String env) {
-    def dependenciesNode = pomXml.asNode().appendNode('dependencies')
-
-    configurations.implementation.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-    configurations.api.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-    configurations.runtimeOnly.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-    if (env == "release") {
-        configurations.releaseImplementation.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-        configurations.releaseApi.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-    } else {
-        configurations.debugImplementation.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-        configurations.debugApi.allDependencies.each { createDependenciesXml(it, dependenciesNode) }
-    }
-}
-
-static def createDependenciesXml(Dependency it, Node dependenciesNode) {
-    if (it.group != 'unspecified' && it.name != 'unspecified' && it.version != 'unspecified') {
-        def dependencyNode = dependenciesNode.appendNode('dependency')
-        dependencyNode.appendNode('groupId', it.group)
-        dependencyNode.appendNode('artifactId', it.name)
-        dependencyNode.appendNode('version', it.version)
-        if (it.properties.excludeRules != null && !it.properties.excludeRules.empty) {
-            def exclusionsNode = dependencyNode.appendNode('exclusions')
-            it.properties.excludeRules.each {
-                def exclusionNode = exclusionsNode.appendNode('exclusion')
-                exclusionNode.appendNode('groupId', it.group ?: '*')
-                exclusionNode.appendNode('artifactId', it.module ?: '*')
-            }
+            groupId = "${rootProject.ext.groupId}"
+            artifactId = "${rootProject.ext.artifactId}"
+            version = "${rootProject.ext.fake_document_generator_version}"
         }
     }
 }
