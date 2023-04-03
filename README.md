@@ -3,7 +3,7 @@
 A fake-document-generator é uma ferramenta que busca ajudar os desenvolvedores a testar os seus
 softwares quando necessitam de números de CPFs, CNPJs ou RGs.
 
-# congifuração
+# configuração
 
 De início, acrescente o seguinte trecho no root <b>build.gradle</b>
 
