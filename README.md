@@ -45,6 +45,10 @@ val cpf = cpfGenerator.generateCpf()
 O método `setFederationUnit` é opcional. Caso deseje um CPF não importando o Estado relacionado,
 você pode desconsiderar a chamada do método.
 
+Além disso, caso queira obter o número do documento com máscara,
+basta chamar o método `withSymbols` passando `true` como parâmetro. 
+Assim, o CPF (por exemplo) virá no modelo `###.###.###-##`.
+
 Há outros métodos opcionais, são eles: `setPrefix` e `setSuffix`.
 
 Por fim, você poderá chamar o método `generateCpfSet(quantity: Int)` para obter um conjunto de
