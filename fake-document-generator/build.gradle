@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'maven-publish'
 }
 
 android {
@@ -40,18 +39,4 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
 }
 
-//apply from: '../publishing.gradle'
-
-afterEvaluate {
-//    publishing.publications.debug.version = "$fake_document_generator_version-SNAPSHOT"
-//    publishing.publications.release.version = "$fake_document_generator_version"
-    android.libraryVariants.each { variant ->
-        publishing.publications.create(variant.name, MavenPublication) {
-            from components.findByName(variant.name)
-
-            groupId = "${rootProject.ext.groupId}"
-            artifactId = "${rootProject.ext.artifactId}"
-            version = "${rootProject.ext.fake_document_generator_version}"
-        }
-    }
-}
+apply from: '../publishing.gradle'
