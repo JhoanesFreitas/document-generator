@@ -1,11 +1,11 @@
 package com.cajusoftware.fakedocumentgenerator.masks
 
-import com.cajusoftware.fakedocumentgenerator.utils.withoutDocumentSymbols
+import com.cajusoftware.fakedocumentgenerator.utils.withoutMask
 
 class Mask(private val maskEnum: MaskEnum) {
 
     fun addMask(cpfString: String): String {
-        val str = cpfString.withoutDocumentSymbols
+        val str = cpfString.withoutMask
         var stringWithMask = ""
 
         var i = 0

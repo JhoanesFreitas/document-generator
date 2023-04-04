@@ -10,7 +10,6 @@ internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator {
     internal var mask: Mask? = null
     internal var prefix: String? = null
     internal var suffix: String? = null
-    internal var federationUnit: FederationUnit? = null
 
     override fun generateCnpj(): String {
         val numbers = arrayListOf<Int>()
