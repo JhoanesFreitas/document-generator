@@ -6,9 +6,9 @@ import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
 internal class RgGeneratorImpl internal constructor() : RgGenerator {
 
-    internal var mask: Mask? = null
-    internal var prefix: String? = null
-    internal var suffix: String? = null
+    override var mask: Mask? = null
+    override var prefix: String? = null
+    override var suffix: String? = null
 
     override fun generateRg(): String {
         val numbers = arrayListOf<Int>()

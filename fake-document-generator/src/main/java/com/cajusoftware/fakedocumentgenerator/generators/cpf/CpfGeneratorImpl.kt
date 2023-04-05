@@ -7,9 +7,9 @@ import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
 internal class CpfGeneratorImpl internal constructor() : CpfGenerator {
 
-    internal var mask: Mask? = null
-    internal var prefix: String? = null
-    internal var suffix: String? = null
+    override var mask: Mask? = null
+    override var prefix: String? = null
+    override var suffix: String? = null
     internal var federationUnit: FederationUnit? = null
 
     override fun generateCpf(): String {

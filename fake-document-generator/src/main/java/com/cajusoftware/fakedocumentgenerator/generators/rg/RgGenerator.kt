@@ -1,29 +1,21 @@
 package com.cajusoftware.fakedocumentgenerator.generators.rg
 
-import com.cajusoftware.fakedocumentgenerator.generators.BaseBuilder
-import com.cajusoftware.fakedocumentgenerator.masks.Mask
-import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGeneratorBuilder
 
-interface RgGenerator {
+interface RgGenerator : BaseGenerator {
     fun generateRg(): String
     suspend fun generateRgSet(quantity: Int): Set<String>
 
-    class Builder : BaseBuilder<Builder, RgGenerator> {
-        private val rgGenerator = RgGeneratorImpl()
+    class Builder : BaseGeneratorBuilder<RgGenerator> {
+        private var _documentGenerator: RgGenerator? = null
 
-        override fun withSymbols(value: Boolean) = apply {
-            if (value)
-                rgGenerator.mask = Mask(MaskEnum.RG)
+        override val documentGenerator: RgGenerator
+            get() = _documentGenerator ?: createGenerator()
+
+        private fun createGenerator(): RgGenerator {
+            _documentGenerator = RgGeneratorImpl()
+            return _documentGenerator!!
         }
-
-        override fun setPrefix(prefix: String) = apply {
-            rgGenerator.prefix = prefix
-        }
-
-        override fun setSuffix(suffix: String) = apply {
-            rgGenerator.suffix = suffix
-        }
-
-        override fun build() = rgGenerator as RgGenerator
     }
 }
