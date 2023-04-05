@@ -1,33 +1,21 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
-import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
-import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
-import com.cajusoftware.fakedocumentgenerator.masks.Mask
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGeneratorBuilder
 
-interface CpfGenerator {
+interface CpfGenerator : BaseGenerator {
     fun generateCpf(): String
     suspend fun generateCpfSet(quantity: Int): Set<String>
 
-    class Builder {
-        private val cpfGenerator = CpfGeneratorImpl()
+    class Builder : BaseGeneratorBuilder<CpfGenerator> {
+        private var _documentGenerator: CpfGenerator? = null
 
-        fun withSymbols(value: Boolean) = apply {
-            if (value)
-                cpfGenerator.mask = Mask(MaskEnum.CPF)
+        override val documentGenerator: CpfGenerator
+            get() = _documentGenerator ?: createGenerator()
+
+        private fun createGenerator(): CpfGenerator {
+            _documentGenerator = CpfGeneratorImpl()
+            return _documentGenerator!!
         }
-
-        fun setPrefix(prefix: String) = apply {
-            cpfGenerator.prefix = prefix
-        }
-
-        fun setSuffix(suffix: String) = apply {
-            cpfGenerator.suffix = suffix
-        }
-
-        fun setFederationUnit(federationUnit: FederationUnit) = apply {
-            cpfGenerator.federationUnit = federationUnit
-        }
-
-        fun build() = cpfGenerator as CpfGenerator
     }
 }

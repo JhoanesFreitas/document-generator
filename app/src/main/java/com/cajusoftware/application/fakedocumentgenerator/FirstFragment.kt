@@ -10,6 +10,7 @@ import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
 import com.cajusoftware.fakedocumentgenerator.generators.cnpj.CnpjGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.cpf.CpfGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.rg.RgGenerator
+import com.cajusoftware.fakedocumentgenerator.utils.setFederationUnit
 
 class FirstFragment : Fragment() {
 
@@ -27,7 +28,9 @@ class FirstFragment : Fragment() {
     }
 
     private val rgGenerator: RgGenerator by lazy {
-        RgGenerator.Builder().withSymbols(true).build()
+        RgGenerator.Builder()
+            .withSymbols(true)
+            .build()
     }
 
     private val cnpjGenerator: CnpjGenerator by lazy {
@@ -40,7 +43,6 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }

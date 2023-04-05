@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.cajusoftware.application.fakedocumentgenerator.databinding.ActivityMainBinding
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
 import com.cajusoftware.fakedocumentgenerator.generators.cpf.CpfGenerator
+import com.cajusoftware.fakedocumentgenerator.utils.setFederationUnit
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {

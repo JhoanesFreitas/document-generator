@@ -1,33 +1,21 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cnpj
 
-import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
-import com.cajusoftware.fakedocumentgenerator.masks.Mask
-import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGeneratorBuilder
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 
-interface CnpjGenerator {
+interface CnpjGenerator : BaseGenerator {
     fun generateCnpj(): String
     suspend fun generateCnpjSet(quantity: Int): Set<String>
 
-    class Builder {
-        private val cnpjGenerator = CnpjGeneratorImpl()
+    class Builder : BaseGeneratorBuilder<CnpjGenerator> {
+        private var _documentGenerator: CnpjGenerator? = null
 
-        fun withSymbols(value: Boolean) = apply {
-            if (value)
-                cnpjGenerator.mask = Mask(MaskEnum.CNPJ)
+        override val documentGenerator: CnpjGenerator
+            get() = _documentGenerator ?: createGenerator()
+
+        private fun createGenerator(): CnpjGenerator {
+            _documentGenerator = CnpjGeneratorImpl()
+            return _documentGenerator!!
         }
-
-        fun setPrefix(prefix: String) = apply {
-            cnpjGenerator.prefix = prefix
-        }
-
-        fun setSuffix(suffix: String) = apply {
-            cnpjGenerator.suffix = suffix
-        }
-
-        fun setFederationUnit(federationUnit: FederationUnit) = apply {
-            cnpjGenerator.federationUnit = federationUnit
-        }
-
-        fun build() = cnpjGenerator as CnpjGenerator
     }
 }

@@ -1,6 +1,6 @@
 package com.cajusoftware.fakedocumentgenerator.utils
 
-val String.withoutDocumentSymbols: String
+val String.withoutMask: String
     get() = this
         .replace(".", "").replace("-", "")
         .replace("(", "").replace(")", "")

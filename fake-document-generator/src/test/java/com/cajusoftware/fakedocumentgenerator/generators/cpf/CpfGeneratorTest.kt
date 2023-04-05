@@ -1,6 +1,7 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.cajusoftware.fakedocumentgenerator.utils.setFederationUnit
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
