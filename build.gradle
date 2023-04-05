@@ -2,7 +2,7 @@
 buildscript {
     ext {
         //versions
-        fake_document_generator_version = '1.1.0'
+        fake_document_generator_version = '1.1.1'
         groupId = 'com.github.JhoanesFreitas'
         artifactId = 'fake-document-generator'
 
