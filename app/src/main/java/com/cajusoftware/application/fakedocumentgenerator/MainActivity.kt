@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val cpfGenerator = CpfGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .setFederationUnit(FederationUnit.RN)
             .build()
 

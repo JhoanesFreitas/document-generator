@@ -8,7 +8,7 @@ class RgGeneratorTest {
     @Test
     fun rgGenerator_generateRg_verifyRgWithSymbols() {
         val rgGenerator = RgGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .build()
 
         val rg = rgGenerator.generateRg()

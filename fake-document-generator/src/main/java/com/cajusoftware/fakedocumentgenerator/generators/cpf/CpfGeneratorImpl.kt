@@ -1,16 +1,22 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.cajusoftware.fakedocumentgenerator.generators.FederationUnitGroup
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.masks.Mask
+import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
 import com.cajusoftware.fakedocumentgenerator.utils.space
 import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
-internal class CpfGeneratorImpl internal constructor() : CpfGenerator {
+internal class CpfGeneratorImpl internal constructor() : CpfGenerator, BaseGenerator,
+    FederationUnitGroup {
 
     override var mask: Mask? = null
     override var prefix: String? = null
     override var suffix: String? = null
-    internal var federationUnit: FederationUnit? = null
+    override var federationUnit: FederationUnit? = null
+    override val documentType: MaskEnum
+        get() = MaskEnum.CPF
 
     override fun generateCpf(): String {
         val numbers = arrayListOf<Int>()

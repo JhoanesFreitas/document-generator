@@ -1,14 +1,18 @@
 package com.cajusoftware.fakedocumentgenerator.generators.rg
 
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.masks.Mask
+import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
 import com.cajusoftware.fakedocumentgenerator.utils.space
 import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
-internal class RgGeneratorImpl internal constructor() : RgGenerator {
+internal class RgGeneratorImpl internal constructor() : RgGenerator, BaseGenerator {
 
     override var mask: Mask? = null
     override var prefix: String? = null
     override var suffix: String? = null
+    override val documentType: MaskEnum
+        get() = MaskEnum.RG
 
     override fun generateRg(): String {
         val numbers = arrayListOf<Int>()

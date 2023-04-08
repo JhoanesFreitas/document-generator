@@ -22,20 +22,20 @@ class FirstFragment : Fragment() {
 
     private val cpfGenerator: CpfGenerator by lazy {
         CpfGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .setFederationUnit(FederationUnit.RN)
             .build()
     }
 
     private val rgGenerator: RgGenerator by lazy {
         RgGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .build()
     }
 
     private val cnpjGenerator: CnpjGenerator by lazy {
         CnpjGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .build()
     }
 

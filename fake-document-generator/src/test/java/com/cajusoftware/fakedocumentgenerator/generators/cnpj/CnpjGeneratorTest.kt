@@ -8,7 +8,7 @@ class CnpjGeneratorTest {
     @Test
     fun cnpjGenerator_generateCnpj_verifyCnpjWithSymbols() {
         val cnpjGenerator = CnpjGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .build()
 
         val cnpj = cnpjGenerator.generateCnpj()

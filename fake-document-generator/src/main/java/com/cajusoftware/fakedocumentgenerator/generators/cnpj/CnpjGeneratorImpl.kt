@@ -1,15 +1,18 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cnpj
 
-import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
+import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.masks.Mask
+import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
 import com.cajusoftware.fakedocumentgenerator.utils.space
 import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
-internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator {
+internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator, BaseGenerator {
 
     override var mask: Mask? = null
     override var prefix: String? = null
     override var suffix: String? = null
+    override val documentType: MaskEnum
+        get() = MaskEnum.CNPJ
 
     override fun generateCnpj(): String {
         val numbers = arrayListOf<Int>()

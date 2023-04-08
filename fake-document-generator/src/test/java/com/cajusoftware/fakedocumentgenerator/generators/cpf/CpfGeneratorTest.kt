@@ -58,7 +58,7 @@ class CpfGeneratorTest {
     @Test
     fun cpfGenerator_generateCpf_verifyCpfWithSymbols() {
         val cpfGenerator = CpfGenerator.Builder()
-            .withSymbols(true)
+            .withSymbols()
             .build()
 
         val cpf = cpfGenerator.generateCpf()
