@@ -1,9 +1,9 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cnpj
 
 import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGeneratorBuilder
-import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
+import com.cajusoftware.fakedocumentgenerator.generators.base.Generator
 
-interface CnpjGenerator : BaseGenerator {
+interface CnpjGenerator : Generator {
     fun generateCnpj(): String
     suspend fun generateCnpjSet(quantity: Int): Set<String>
 

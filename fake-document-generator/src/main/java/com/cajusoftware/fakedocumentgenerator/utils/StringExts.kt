@@ -9,3 +9,8 @@ val String.withoutMask: String
 
 fun String?.space(): String = "$this "
 fun String?.spaceBeforeThat(): String = " $this"
+
+fun String.concatenateSuffix(suffix: String?): String {
+    return this
+        .plus((suffix?.trim()?.spaceBeforeThat() ?: ""))
+}

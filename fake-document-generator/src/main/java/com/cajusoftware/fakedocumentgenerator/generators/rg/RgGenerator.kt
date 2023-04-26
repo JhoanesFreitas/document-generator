@@ -1,9 +1,9 @@
 package com.cajusoftware.fakedocumentgenerator.generators.rg
 
-import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGeneratorBuilder
+import com.cajusoftware.fakedocumentgenerator.generators.base.Generator
 
-interface RgGenerator : BaseGenerator {
+interface RgGenerator : Generator {
     fun generateRg(): String
     suspend fun generateRgSet(quantity: Int): Set<String>
 

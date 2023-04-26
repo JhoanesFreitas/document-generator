@@ -4,12 +4,12 @@ import com.cajusoftware.fakedocumentgenerator.utils.setInternalPrefix
 import com.cajusoftware.fakedocumentgenerator.utils.setInternalSuffix
 import com.cajusoftware.fakedocumentgenerator.utils.setMask
 
-interface BaseGeneratorBuilder<V : BaseGenerator> {
+interface BaseGeneratorBuilder<T : Generator> {
 
-    val documentGenerator: V
+    val documentGenerator: T
 
-    fun withSymbols(value: Boolean) = apply {
-        if (value) setMask()
+    fun withSymbols() = apply {
+        setMask()
     }
 
     fun setPrefix(prefix: String) = apply {
