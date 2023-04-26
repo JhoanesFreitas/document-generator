@@ -43,7 +43,8 @@ val cpf = cpfGenerator.generateCpf()
 ```
 
 O método `setFederationUnit` é opcional. Caso deseje um CPF não importando o Estado relacionado,
-você pode desconsiderar a chamada do método.
+você pode desconsiderar a chamada do método. Além disso, ele é uma extensão da classe Builder. Portanto, 
+importe-o quando solicitado.
 
 Nota: A geração de RG é baseada nas regras da SSP/SP.
 
