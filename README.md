@@ -19,7 +19,7 @@ Em seguida, você deve adicionar a dependência do projeto no arquivo gradle do 
 
 ```
 dependencies {
-    implementation 'com.github.JhoanesFreitas:fake-document-generator:v1.1.0'
+    implementation 'com.github.JhoanesFreitas:fake-document-generator:v1.1.2'
 }
 ```
 
@@ -44,6 +44,8 @@ val cpf = cpfGenerator.generateCpf()
 
 O método `setFederationUnit` é opcional. Caso deseje um CPF não importando o Estado relacionado,
 você pode desconsiderar a chamada do método.
+
+Nota: A geração de RG é baseada nas regras da SSP/SP.
 
 Além disso, caso queira obter o número do documento com máscara,
 basta chamar o método `withSymbols` passando `true` como parâmetro. 
