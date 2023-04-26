@@ -2,6 +2,7 @@ package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
 import com.cajusoftware.fakedocumentgenerator.generators.FederationUnit
 import com.cajusoftware.fakedocumentgenerator.utils.setFederationUnit
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -84,5 +85,15 @@ class CpfGeneratorTest {
 
         val cpf = cpfGenerator.generateCpf()
         assertTrue(cpf.endsWith("<<<"))
+    }
+
+    @Test
+    fun cpfGenerator_generateCpfSet_verifyCpfSetSize() = runBlocking {
+        val cpfGenerator = CpfGenerator.Builder()
+            .build()
+
+        val cpfSet = cpfGenerator.generateCpfSet(2)
+
+        assertTrue(cpfSet.size == 2)
     }
 }

@@ -57,6 +57,13 @@ internal class RgGeneratorImpl internal constructor() : RgGenerator, BaseGenerat
         digitalChecker = getNumberChecker(sumSequenceDigitalChecker)
     }
 
+    private fun getNumberChecker(sumSequence: Int): String =
+        when (sumSequence % 11) {
+            1 -> "X"
+            0 -> 0.toString()
+            else -> (11 - (sumSequence % 11)).toString()
+        }
+
     private fun formatRgNumbers() {
         returnedRg = rgNumbers.joinToString("") + digitalChecker
     }
@@ -83,11 +90,4 @@ internal class RgGeneratorImpl internal constructor() : RgGenerator, BaseGenerat
 
         return rgSet
     }
-
-    private fun getNumberChecker(sumSequence: Int): String =
-        when (sumSequence % 11) {
-            1 -> "X"
-            0 -> 0.toString()
-            else -> (11 - (sumSequence % 11)).toString()
-        }
 }

@@ -1,5 +1,7 @@
 package com.cajusoftware.fakedocumentgenerator.generators.rg
 
+import com.cajusoftware.fakedocumentgenerator.generators.cpf.CpfGenerator
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -54,6 +56,16 @@ class RgGeneratorTest {
 
         val rg = rgGenerator.generateRg()
         assertTrue(rg.endsWith("<<<"))
+    }
+
+    @Test
+    fun rgGenerator_generateRgSet_verifyRgSetSize() = runBlocking {
+        val rgGenerator = RgGenerator.Builder()
+            .build()
+
+        val rgSet = rgGenerator.generateRgSet(2)
+
+        assertTrue(rgSet.size == 2)
     }
 
     private fun getNumberChecker(sumSequence: Int): String =

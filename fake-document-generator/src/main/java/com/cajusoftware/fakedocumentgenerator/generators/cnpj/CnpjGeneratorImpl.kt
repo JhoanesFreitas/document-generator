@@ -75,6 +75,9 @@ internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator, BaseGen
         secondDigitalChecker = getNumberChecker(sumSecondSequenceDigitalChecker)
     }
 
+    private fun getNumberChecker(sumSequence: Int): Int =
+        if (sumSequence % 11 < 2) 0 else 11 - (sumSequence % 11)
+
     private fun formatCnpjNumbers() {
         returnedCnpj = (cnpjNumbers.joinToString("")) + firstDigitalChecker + secondDigitalChecker
     }
@@ -101,7 +104,4 @@ internal class CnpjGeneratorImpl internal constructor() : CnpjGenerator, BaseGen
 
         return cnpjSet
     }
-
-    private fun getNumberChecker(sumSequence: Int): Int =
-        if (sumSequence % 11 < 2) 0 else 11 - (sumSequence % 11)
 }

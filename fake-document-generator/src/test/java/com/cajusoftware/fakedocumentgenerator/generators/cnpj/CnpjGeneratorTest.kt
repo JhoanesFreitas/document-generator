@@ -1,5 +1,6 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cnpj
 
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -71,6 +72,16 @@ class CnpjGeneratorTest {
 
         val cnpj = cnpjGenerator.generateCnpj()
         assertTrue(cnpj.endsWith("<<<"))
+    }
+
+    @Test
+    fun cnpjGenerator_generateCnpjSet_verifyCnpjSetSize() = runBlocking {
+        val cnpjGenerator = CnpjGenerator.Builder()
+            .build()
+
+        val cnpjSet = cnpjGenerator.generateCnpjSet(2)
+
+        assertTrue(cnpjSet.size == 2)
     }
 
     private fun getNumberChecker(sumSequence: Int): Int =
