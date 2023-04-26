@@ -5,10 +5,10 @@ import com.cajusoftware.fakedocumentgenerator.generators.FederationUnitGroup
 import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.masks.Mask
 import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
+import com.cajusoftware.fakedocumentgenerator.utils.concatenateSuffix
 import com.cajusoftware.fakedocumentgenerator.utils.getRandomNumberFromSequence
 import com.cajusoftware.fakedocumentgenerator.utils.isFederationNumberKey
 import com.cajusoftware.fakedocumentgenerator.utils.space
-import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
 /***
  *
@@ -108,17 +108,12 @@ internal class CpfGeneratorImpl internal constructor() : CpfGenerator, BaseGener
     }
 
     private fun getFinalCpfStyle(): String {
-        return concatenatePrefixToReturnedCpf().concatenateSuffix()
+        return concatenatePrefixToReturnedCpf().concatenateSuffix(suffix)
     }
 
     private fun concatenatePrefixToReturnedCpf(): String {
         return (prefix?.trim()?.space() ?: "")
             .plus(returnedCpf)
-    }
-
-    private fun String.concatenateSuffix(): String {
-        return this
-            .plus((suffix?.trim()?.spaceBeforeThat() ?: ""))
     }
 
     override suspend fun generateCpfSet(quantity: Int): Set<String> {

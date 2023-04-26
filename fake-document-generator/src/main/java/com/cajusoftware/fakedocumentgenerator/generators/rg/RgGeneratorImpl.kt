@@ -3,9 +3,16 @@ package com.cajusoftware.fakedocumentgenerator.generators.rg
 import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.masks.Mask
 import com.cajusoftware.fakedocumentgenerator.masks.MaskEnum
+import com.cajusoftware.fakedocumentgenerator.utils.concatenateSuffix
 import com.cajusoftware.fakedocumentgenerator.utils.space
-import com.cajusoftware.fakedocumentgenerator.utils.spaceBeforeThat
 
+/***
+ *
+ * An RgGenerationImpl allows to generate RG numbers according to the RG algorithm.
+ * This algorithm conforms to the SSP-SP. Thus, it generates numbers following the rules
+ * established by the SSP-SP.
+ *
+ */
 internal class RgGeneratorImpl internal constructor() : RgGenerator, BaseGenerator {
 
     override var mask: Mask? = null
@@ -14,26 +21,57 @@ internal class RgGeneratorImpl internal constructor() : RgGenerator, BaseGenerat
     override val documentType: MaskEnum
         get() = MaskEnum.RG
 
-    override fun generateRg(): String {
-        val numbers = arrayListOf<Int>()
-        var sumFirstSequence = 0
-        var index = 2
+    private val rgNumbers = arrayListOf<Int>()
+    private var sumSequenceDigitalChecker = 0
+    private var digitalChecker = ""
+    private var index = 2
 
+    private var returnedRg = ""
+
+    override fun generateRg(): String {
+        generateRgTopEightNumbers()
+
+        calculateSequenceSumToDigitalChecker()
+        getDigitalChecker()
+
+        formatRgNumbers()
+        addMaskToRgNumbers()
+
+        return getFinalRgStyle()
+    }
+
+    private fun generateRgTopEightNumbers() {
         repeat((1..8).count()) {
             val number = (0..9).random()
-            numbers.add(number)
-            sumFirstSequence += (number * index++)
+            rgNumbers.add(number)
         }
+    }
 
-        val verifyDigit = getNumberChecker(sumFirstSequence)
+    private fun calculateSequenceSumToDigitalChecker() {
+        repeat((0..7).count()) {
+            sumSequenceDigitalChecker += (rgNumbers[it] * index++)
+        }
+    }
 
-        var rg = numbers.joinToString("") + verifyDigit
+    private fun getDigitalChecker() {
+        digitalChecker = getNumberChecker(sumSequenceDigitalChecker)
+    }
 
-        rg = mask?.addMask(rg) ?: rg
+    private fun formatRgNumbers() {
+        returnedRg = rgNumbers.joinToString("") + digitalChecker
+    }
 
+    private fun addMaskToRgNumbers() {
+        returnedRg = mask?.addMask(returnedRg) ?: returnedRg
+    }
+
+    private fun getFinalRgStyle(): String {
+        return concatenatePrefixToReturnedRg().concatenateSuffix(suffix)
+    }
+
+    private fun concatenatePrefixToReturnedRg(): String {
         return (prefix?.trim()?.space() ?: "")
-            .plus(rg)
-            .plus((suffix?.trim()?.spaceBeforeThat() ?: ""))
+            .plus(returnedRg)
     }
 
     override suspend fun generateRgSet(quantity: Int): Set<String> {
