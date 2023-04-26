@@ -1,5 +1,9 @@
 package com.cajusoftware.fakedocumentgenerator.generators
 
+interface FederationUnitGroup {
+    var federationUnit: FederationUnit?
+}
+
 enum class FederationUnit(val digit: Int) {
     DF(1), GO(1), MS(1), MT(1), TO(1),
 
@@ -18,6 +22,6 @@ enum class FederationUnit(val digit: Int) {
     SP(8),
 
     PR(9), SC(9),
-    
+
     RS(0)
 }

@@ -1,9 +1,9 @@
 package com.cajusoftware.fakedocumentgenerator.generators.cpf
 
-import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGenerator
 import com.cajusoftware.fakedocumentgenerator.generators.base.BaseGeneratorBuilder
+import com.cajusoftware.fakedocumentgenerator.generators.base.Generator
 
-interface CpfGenerator : BaseGenerator {
+interface CpfGenerator : Generator {
     fun generateCpf(): String
     suspend fun generateCpfSet(quantity: Int): Set<String>
 
